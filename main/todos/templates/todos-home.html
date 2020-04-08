@@ -1,0 +1,37 @@
+
+{% include 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row mt-4">
+    <div class="col">
+    <h2>Add Item</h2>
+    <form class="form-inline" action="{% url 'todos:todos-add' %}" method="POST">
+      <input type="text" name="text" class="form-control mb-2 mr-sm-2"
+      placeholder="type here..." >
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <h2>Item List</h2>
+      <ul class="list-group">
+        {% for item in object_list %}
+
+          <li class="list-group-item">
+              <p> {{item.text}}</p>
+              <p> {{item.added_date|date}}</p>
+
+              <a href="{% url 'todos:todos-delete' item.id %}" class="btn btn-danger" style="float: right;">Delete</a>
+            </li>
+
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
